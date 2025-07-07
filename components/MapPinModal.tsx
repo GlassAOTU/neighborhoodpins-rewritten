@@ -1,5 +1,5 @@
-// components/Modal.js
 import React, { useState } from 'react'
+
 import ConeIcon from '@/assets/icons/traffic-cone.svg'
 import TreeIcon from '@/assets/icons/tree-pine.svg'
 import LightIcon from '@/assets/icons/lightbulb-off.svg'

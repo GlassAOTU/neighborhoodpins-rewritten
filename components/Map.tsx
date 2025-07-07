@@ -6,6 +6,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { useEffect, useRef, useState } from "react";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapPinModal from "./MapPinModal";
+import { useSession } from "@/app/context/SessionContext";
 
 export default function Map() {
 
@@ -18,6 +19,8 @@ export default function Map() {
 
     const [showModal, setShowModal] = useState(false)
     const onClose = () => setShowModal(false)
+
+    const session = useSession();
 
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY
 
@@ -331,9 +334,28 @@ export default function Map() {
 
             {showModal && (
                 <div className="absolute inset-0 z-50 bg-[#00000077] flex items-center justify-center">
-                    <MapPinModal point={point} address={address} municipality={municipality} onClose={onClose} />
+                    {session ? (
+                        <MapPinModal
+                            point={point}
+                            address={address}
+                            municipality={municipality}
+                            onClose={onClose}
+                        />
+                    ) : (
+                        <div className="bg-white rounded-lg p-6 shadow-xl max-w-sm text-center">
+                            <h2 className="text-xl font-bold mb-4">Login Required</h2>
+                            <p className="mb-6">You need to be logged in to drop a pin.</p>
+                            <button
+                                onClick={onClose}
+                                className="bg-emerald-700 text-white px-4 py-2 rounded hover:bg-emerald-800 transition"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
+
         </div>
 
     )
