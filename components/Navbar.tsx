@@ -1,6 +1,13 @@
-export default function Navbar() {
+import { auth0 } from "@/lib/auth0";
+import Link from "next/link";
+import Branding from "./Branding";
+
+export default async function Navbar() {
+
+    const session = await auth0.getSession();
+
     return (
-        <nav className="text-white bg-emerald-800 px-5 py-4">
+        <nav className="text-white bg-emerald-800 px-5 py-3">
             <div className="flex flex-row justify-between">
 
                 <Branding />
