@@ -142,6 +142,31 @@ export default function Map() {
                     },
                 })
 
+                map.on('mouseenter', () => {
+                    map.getCanvas().style.cursor = 'crosshair'
+                })
+
+                map.on('mousedown', () => {
+                    map.getCanvas().style.cursor = 'crosshair'
+                })
+
+                map.on('mouseup', () => {
+                    map.getCanvas().style.cursor = 'crosshair'
+                })
+
+                map.on('mouseout', () => {
+                    map.getCanvas().style.cursor = 'crosshair'
+                })
+
+                map.on('dragstart', () => {
+                    map.getCanvas().style.cursor = 'crosshair'
+                })
+
+                map.on('dragend', () => {
+                    map.getCanvas().style.cursor = 'crosshair'
+                })
+
+
                 // changes the cursor to a pointer when the mouse is over the pins
                 map.on('mouseenter', 'pin-points', (e: any) => {
                     map.getCanvas().style.cursor = 'pointer'
