@@ -26,6 +26,7 @@ export default function MapPinModal({
             town: address[1],
             zipcode: address[2],
             municipality: municipality,
+            submitted_by: uuid
         };
     };
 

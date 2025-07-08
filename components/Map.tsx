@@ -22,6 +22,7 @@ export default function Map() {
     const onClose = () => setShowModal(false)
 
     const session = useSession();
+    const uuid = session?.user?.sub; 
 
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY
 
@@ -394,12 +395,11 @@ export default function Map() {
         <div className="fixed top-[64px] left-0 right-0 bottom-0 z-0">
             <MapLegend />
 
+
             <div
                 ref={mapContainer}
                 className="h-full w-full z-10"
             />
-
-
 
             {showModal && (
                 <div className="absolute inset-0 z-50 bg-[#00000077] flex items-center justify-center">
@@ -410,6 +410,7 @@ export default function Map() {
                             municipality={municipality}
                             onClose={onClose}
                             fetchDataAndAddToMap={() => fetchDataAndAddToMap(mapRef.current)} // Pass the function with mapRef
+                            uuid={uuid} 
                         />
                     ) : (
                         <div className="bg-white rounded-lg p-6 shadow-xl max-w-sm text-center">

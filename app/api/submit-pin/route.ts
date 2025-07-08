@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
             street,
             town,
             zipcode,
-            municipality
+            municipality,
+            submitted_by
         } = body
 
         await pool.query(
@@ -24,8 +25,9 @@ export async function POST(req: NextRequest) {
         street,
         town,
         zipcode,
-        municipality
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7)
+        municipality,
+        submitted_by
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
       `,
             [
                 latitude,
@@ -34,7 +36,8 @@ export async function POST(req: NextRequest) {
                 street,
                 town,
                 zipcode,
-                municipality
+                municipality,
+                submitted_by
             ]
         )
 
