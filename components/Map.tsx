@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapPinModal from "./MapPinModal";
 import { useSession } from "@/app/context/SessionContext";
+import MapLegend from "./MapLegend";
 
 export default function Map() {
 
@@ -398,11 +399,14 @@ export default function Map() {
 
     return (
         <div className="fixed top-[64px] left-0 right-0 bottom-0 z-0">
+            <MapLegend />
 
             <div
                 ref={mapContainer}
                 className="h-full w-full z-10"
             />
+
+
 
             {showModal && (
                 <div className="absolute inset-0 z-50 bg-[#00000077] flex items-center justify-center">
