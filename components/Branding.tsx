@@ -3,10 +3,11 @@
 import Image from "next/image"
 
 import icon from '@/public/icon.svg'
+import Link from "next/link"
 
 export default function Branding() {
     return (
-        <div className="flex flex-row gap-2">
+        <Link href='/' className="flex flex-row gap-2">
             <Image
                 src='../icon.svg'
                 alt='NeighborhoodPins icon'
@@ -23,6 +24,6 @@ export default function Branding() {
                 className='mt-2 hidden md:inline-block'
                 priority
             />
-        </div>
+        </Link>
     )
 }
