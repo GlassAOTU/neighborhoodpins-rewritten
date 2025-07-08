@@ -3,7 +3,7 @@ import pool from '@/lib/db' // your pg pool
 
 export async function GET() {
     try {
-        const result = await pool.query('SELECT * FROM municipalities')
+        const result = await pool.query('SELECT * FROM municipalities ORDER BY name ASC')
 
         return new Response(JSON.stringify(result.rows), {
             status: 200,
