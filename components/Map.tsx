@@ -351,7 +351,8 @@ export default function Map() {
     }
 
     return (
-        <div className="relative h-[calc(100vh-50px)] w-full">
+        <div className="fixed top-[64px] left-0 right-0 bottom-0 z-0">
+
             <div
                 ref={mapContainer}
                 className="h-full w-full z-10"
