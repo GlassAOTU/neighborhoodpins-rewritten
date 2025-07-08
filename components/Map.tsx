@@ -167,7 +167,6 @@ export default function Map() {
                     map.getCanvas().style.cursor = 'crosshair'
                 })
 
-
                 // changes the cursor to a pointer when the mouse is over the pins
                 map.on('mouseenter', 'pin-points', (e: any) => {
                     map.getCanvas().style.cursor = 'pointer'
@@ -224,8 +223,8 @@ export default function Map() {
                     // Copy coordinates array.
                     const coordinates = e.features[0].geometry.coordinates.slice()
                     const type_name = e.features[0].properties.type_name
-                    const street_name = e.features[0].properties.street_name
-                    const town_name = e.features[0].properties.town_name
+                    const street = e.features[0].properties.street
+                    const town = e.features[0].properties.town
                     const zipcode = e.features[0].properties.zipcode
                     const municipality = e.features[0].properties.municipality
                     const department = e.features[0].properties.department
@@ -260,7 +259,7 @@ export default function Map() {
                                 </h2>
 
                                 <p style="font-size: 14px; text-align: center; margin-bottom: 12px;">
-                                    ${street_name}, ${town_name}, ${zipcode}
+                                    ${street}, ${town}, ${zipcode}
                                 </p>
 
                                 <div style="
@@ -276,7 +275,7 @@ export default function Map() {
                                 </div>
 
                                 <p style="font-size: 14px; text-align: center; margin: 4px 0;">
-                                    ${municipality} ${department}
+                                    ${municipality} - ${department}
                                 </p>
 
                                 <p style="font-size: 14px; text-align: center; font-weight: bold; text-decoration: underline;">
@@ -296,9 +295,6 @@ export default function Map() {
                         closeButton.style.top = '6px'; // optional position tweaks
                         closeButton.style.right = '8px';
                     }
-
-
-
                     // center the pin clicked on
                     map.flyTo({
                         center: e.features[0].geometry.coordinates,
@@ -349,7 +345,7 @@ export default function Map() {
 
             console.log(data)
 
-            const features = data.map((item: { id: any; latitude: string; longitude: string; issue_type: any; issue_types: { type: any; }; street_name: any; town_name: any; zipcode: any; municipality_name: any; government: { department_name: any; phone_number: any; }; }) => ({
+            const features = data.map((item: { id: any; latitude: string; longitude: string; issue_type: any; issue_types: { type: any; }; street: any; town: any; zipcode: any; municipality: any; government: { department: any; phone_number: any; }; }) => ({
                 type: 'Feature',
                 geometry: {
                     type: 'Point',
@@ -362,13 +358,13 @@ export default function Map() {
                     id: item.id,
                     type_num: item.issue_type,
                     // @ts-ignore -- code works completely fine, TS is throwing errors
-                    type_name: item.issue_type,
-                    street_name: item.street_name,
-                    town_name: item.town_name,
+                    type_name: item.issue_type_name,
+                    street: item.street,
+                    town: item.town,
                     zipcode: item.zipcode,
-                    municipality_name: item.municipality_name,
+                    municipality: item.municipality,
                     // @ts-ignore -- code works completely fine, TS is throwing errors
-                    department_name: item.department_name,
+                    department: item.department,
                     // @ts-ignore -- code works completely fine, TS is throwing errors
                     phone_number: item.phone_number,
                 },
