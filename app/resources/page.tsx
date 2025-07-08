@@ -39,17 +39,19 @@ export default function Reports() {
                             <div className="flex flex-col md:flex-row md:justify-between gap-4">
                                 <div className="space-y-1">
                                     <p className="font-semibold">{town.department}</p>
-                                    <p>{town.address}</p>
-                                    <p>From {town.timing}</p>
+                                    <a href={`http://maps.google.com/?q=${town.address}`} title="Open in Google Maps" className="text-emerald-700 hover:underline">
+                                        {town.address}
+                                    </a>
+                                    <p>Open from {town.timing}</p>
                                 </div>
-                                <div className="space-y-1">
+                                <div className="space-y-1 text-left md:text-right flex flex-col">
                                     <p className="font-semibold">Contact</p>
                                     <a href={`tel:${town.phone_number}`} className="text-emerald-700 hover:underline">
                                         {town.phone_number}
                                     </a>
-                                    <p>{town.email}</p>
+                                    <a href={`mailto:${town.email}`} className="text-emerald-700 hover:underline">{town.email}</a>
                                     <a href={town.website} className="text-emerald-700 hover:underline">
-                                        {town.website}
+                                        {town.department} site
                                     </a>
                                 </div>
                             </div>
