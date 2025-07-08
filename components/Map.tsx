@@ -11,8 +11,8 @@ import MapLegend from "./MapLegend";
 
 export default function Map() {
 
-    const mapContainer = useRef(null)
-    const mapRef = useRef(null)
+    const mapContainer = useRef<HTMLDivElement | null>(null)
+    const mapRef = useRef<mapboxgl.Map | null>(null)
 
     const [point, setPoint] = useState<any>()
     const [address, setAddress] = useState<any>([])
@@ -28,7 +28,6 @@ export default function Map() {
     // actual map creation
     useEffect(() => {
         if (mapContainer.current) {
-            // creates the map, but doesn't load it
             const map = new mapboxgl.Map({
                 container: mapContainer.current as HTMLElement,
                 style: 'mapbox://styles/mapbox/dark-v11',
@@ -41,7 +40,9 @@ export default function Map() {
                     [-74.056, 40.535],
                     [-71.85, 41.197],
                 ],
-            })
+            });
+
+            mapRef.current = map;
 
             // mouse hover now shows crosshair
             map.getCanvas().style.cursor = 'crosshair';
@@ -338,60 +339,56 @@ export default function Map() {
             const response = await fetch('/api/get-pins', {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            const data = await response.json()
-
-            console.log(data)
-
-            const features = data.map((item: { id: any; latitude: string; longitude: string; issue_type: any; issue_types: { type: any; }; street: any; town: any; zipcode: any; municipality: any; government: { department: any; phone_number: any; }; }) => ({
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [
-                        parseFloat(item.longitude),
-                        parseFloat(item.latitude),
-                    ],
+                    'Content-Type': 'application/json',
                 },
-                properties: {
-                    id: item.id,
-                    type_num: item.issue_type,
-                    // @ts-ignore -- code works completely fine, TS is throwing errors
-                    type_name: item.issue_type_name,
-                    street: item.street,
-                    town: item.town,
-                    zipcode: item.zipcode,
-                    municipality: item.municipality,
-                    // @ts-ignore -- code works completely fine, TS is throwing errors
-                    department: item.department,
-                    // @ts-ignore -- code works completely fine, TS is throwing errors
-                    phone_number: item.phone_number,
-                },
-            }))
+            });
+            const data = await response.json();
 
-            // creates an empty geojson feature collection
+            const features = data.map(
+                (item: {
+                    id: any;
+                    latitude: string;
+                    longitude: string;
+                    issue_type: any;
+                    issue_type_name: any;
+                    street: any;
+                    town: any;
+                    zipcode: any;
+                    municipality: any;
+                    department: any;
+                    phone_number: any;
+                }) => ({
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [parseFloat(item.longitude), parseFloat(item.latitude)],
+                    },
+                    properties: {
+                        id: item.id,
+                        type_num: item.issue_type,
+                        type_name: item.issue_type_name,
+                        street: item.street,
+                        town: item.town,
+                        zipcode: item.zipcode,
+                        municipality: item.municipality,
+                        department: item.department,
+                        phone_number: item.phone_number,
+                    },
+                })
+            );
+
             const geojsonData = {
                 type: 'FeatureCollection',
                 features: features,
-            }
+            };
 
-            // adds the pins from the point features to the geojson
             if (map.getSource('pin-data')) {
-                map.getSource('pin-data').setData(geojsonData)
+                map.getSource('pin-data').setData(geojsonData);
             }
-
-            // Save the coordinates to localStorage
-            // localStorage.setItem('lastPin', JSON.stringify({
-            //     longitude: finalData.longitude,
-            //     latitude: finalData.latitude
-            // }));
-            onClose(); // Close the modal before refreshing
-            // window.location.reload(); // Refresh the page
         } catch (error) {
-            console.error(error);
+            console.error('Error fetching pins:', error);
         }
-    }
+    };
 
     return (
         <div className="fixed top-[64px] left-0 right-0 bottom-0 z-0">
@@ -412,6 +409,7 @@ export default function Map() {
                             address={address}
                             municipality={municipality}
                             onClose={onClose}
+                            fetchDataAndAddToMap={() => fetchDataAndAddToMap(mapRef.current)} // Pass the function with mapRef
                         />
                     ) : (
                         <div className="bg-white rounded-lg p-6 shadow-xl max-w-sm text-center">

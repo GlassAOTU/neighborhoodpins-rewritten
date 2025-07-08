@@ -12,45 +12,48 @@ export default function MapPinModal({
     uuid,
     onClose,
     onDeletePin,
+    fetchDataAndAddToMap, // Add the new prop
 }: any) {
-    const [issueSelection, setIssueSelection] = useState('')
-    // const [severitySelection, setSeveritySelection] = useState('')
-    const [showError, setShowError] = useState(false)
+    const [issueSelection, setIssueSelection] = useState('');
+    const [showError, setShowError] = useState(false);
 
     const createFinalData = () => {
         return {
-            // submitted_by: uuid,
             latitude: parseFloat(point.lat),
             longitude: parseFloat(point.lng),
             issue_type: parseInt(issueSelection),
-            // severity: severitySelection,
             street: address[0],
             town: address[1],
             zipcode: address[2],
             municipality: municipality,
-        }
-    }
+        };
+    };
 
     const onSubmit = async () => {
-        if (issueSelection === '') {    //  || severitySelection === '' deleted
-            setShowError(true)
+        if (issueSelection === '') {
+            setShowError(true);
         } else {
-            const finalData = createFinalData()
+            const finalData = createFinalData();
             try {
-                await fetch('/api/submit-pin', {
+                const response = await fetch('/api/submit-pin', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(finalData)
-                })
-                // console.log(finalData)
-                onClose(); // Close the modal before refreshing
+                    body: JSON.stringify(finalData),
+                });
+
+                if (response.ok) {
+                    await fetchDataAndAddToMap(); // Call to update the map with new pins
+                    onClose(); // Close the modal
+                } else {
+                    console.error('Failed to submit pin:', await response.json());
+                }
             } catch (error) {
-                console.error(error);
+                console.error('Error submitting pin:', error);
             }
         }
-    }
+    };
 
     const handleCancel = () => {
         // onDeletePin()
