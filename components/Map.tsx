@@ -243,14 +243,60 @@ export default function Map() {
                     // based on the feature found.
                     popup
                         .setLngLat(coordinates)
-                        .setHTML(
-                            `<h2 style="text-align: center; font-weight: bold; font-size: 20px; padding: 5px; background-color: #125b49; border-radius: 10px; margin: 5px 10px 10px 10px; color: white">${type_name}</h2>
-					        <h3 style="font-size: 16px; text-align: center; padding-bottom: 10px">${street_name}, ${town_name}, ${zipcode}</h3>
-					        <h2 style="text-align: center; font-weight: bold; font-size: 20px; padding: 5px; background-color: #125b49; border-radius: 10px; margin: 5px 10px 10px 10px; color: white"">Contact</h2>
-					        <h3 style="font-size: 16px; text-align: center; padding-bottom: 10px">${municipality} ${department}</h3>
-					        <h3 style="font-size: 16px; text-align: center; font-weight: bold"><u>${phone_number}</u></h3>`
-                        )
-                        .addTo(map)
+                        .setHTML(`
+                            <div style="font-family: sans-serif; padding: 12px; max-width: 260px;">
+                                <h2 style="
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    background-color: #125b49;
+                                    color: white;
+                                    padding: 8px;
+                                    border-radius: 8px;
+                                    text-align: center;
+                                    margin: 0 0 8px 0;"
+                                >
+                                    ${type_name}
+                                </h2>
+
+                                <p style="font-size: 14px; text-align: center; margin-bottom: 12px;">
+                                    ${street_name}, ${town_name}, ${zipcode}
+                                </p>
+
+                                <div style="
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    background-color: #125b49;
+                                    color: white;
+                                    padding: 6px;
+                                    border-radius: 6px;
+                                    text-align: center;
+                                    margin-bottom: 8px;">
+                                    Contact
+                                </div>
+
+                                <p style="font-size: 14px; text-align: center; margin: 4px 0;">
+                                    ${municipality} ${department}
+                                </p>
+
+                                <p style="font-size: 14px; text-align: center; font-weight: bold; text-decoration: underline;">
+                                    ${phone_number}
+                                </p>
+                            </div>
+                        `)
+                    popup.addTo(map);
+
+                    // Wait for DOM to render, then modify the close button
+                    const closeButton = document.querySelector('.mapboxgl-popup-close-button') as HTMLElement;
+
+                    if (closeButton) {
+                        closeButton.style.fontSize = '20px'; // default is 14px
+                        closeButton.style.fontWeight = 'bold';
+                        closeButton.style.color = '#125b49'; // optional
+                        closeButton.style.top = '6px'; // optional position tweaks
+                        closeButton.style.right = '8px';
+                    }
+
+
 
                     // center the pin clicked on
                     map.flyTo({
