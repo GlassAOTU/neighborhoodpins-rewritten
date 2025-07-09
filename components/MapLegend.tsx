@@ -9,23 +9,24 @@ export default function MapLegend() {
                 </div>
 
                 <div className='flex items-center my-2 mx-2'>
-                    <div className='w-5 h-5 bg-orange-400 rounded-full mr-2 ring-2 ring-inset ring-orange-700'></div>
+                    <div className='w-5 h-5 bg-linear-to-b from-orange-400 to-orange-700 rounded-full mr-2 shadow-md shadow-orange-800/50'></div>
                     <span>Pothole</span>
                 </div>
 
                 <div className='flex items-center my-2 mx-2'>
-                    <div className='w-5 h-5 bg-green-400 rounded-full mr-2 ring-2 ring-inset ring-green-700'></div>
+                    <div className='w-5 h-5 bg-linear-to-b from-green-400 to-green-700 rounded-full mr-2 shadow-md shadow-green-800/50'></div>
                     <span>Fallen tree</span>
                 </div>
 
+
                 <div className='flex items-center my-2 mx-2'>
-                    <div className='w-5 h-5 bg-yellow-300 rounded-full mr-2 ring-2 ring-inset ring-yellow-600'></div>
+                    <div className='w-5 h-5 bg-linear-to-b from-yellow-400 to-yellow-600 rounded-full mr-2 shadow-md shadow-yellow-700/50'></div>
                     <span>Broken streetlight</span>
                 </div>
 
                 <div className='flex items-center my-2 mx-2'>
-                    <div className='w-5 h-5 bg-blue-400 rounded-full mr-2 ring-2 ring-inset ring-blue-700'></div>
-                    <span>Flooding</span>
+                    <div className='w-5 h-5 bg-linear-to-b from-blue-400 to-blue-700 rounded-full mr-2 shadow-md shadow-blue-700/50'></div>
+                    <span>Flood</span>
                 </div>
             </div>
         </div>
