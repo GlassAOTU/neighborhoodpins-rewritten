@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 
 export default function Accordion({ title, children }: { title: string, children: React.ReactNode }) {

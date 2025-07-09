@@ -138,7 +138,7 @@ export default function ReportsTable() {
                     <input
                         type="text"
                         placeholder="Search Zipcode"
-                        className="px-2 py-1 h-9 rounded bg-white shadow-md focus:shadow-md/25 transition-all text-md outline outline-stone-300 focus:outline-stone-600"
+                        className="px-2 py-1 h-9 rounded bg-white shadow-md focus:shadow-md/25 transition-all text-md outline outline-stone-300 focus:outline-stone-600 sm:w-auto w-36"
                         value={zipcodeFilter}
                         onChange={(e) => setZipcodeFilter(e.target.value)}
                     />
