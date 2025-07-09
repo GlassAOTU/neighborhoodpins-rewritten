@@ -4,6 +4,7 @@ import ConeIcon from '@/assets/icons/traffic-cone.svg'
 import TreeIcon from '@/assets/icons/tree-pine.svg'
 import LightIcon from '@/assets/icons/lightbulb-off.svg'
 import FloodIcon from '@/assets/icons/waves.svg'
+import Link from 'next/link'
 
 export default function MapPinModal({
     point,
@@ -127,7 +128,7 @@ export default function MapPinModal({
                                     onChange={onIssueChange}
                                     required
                                 />
-                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset hover:text-orange-700 peer-checked:text-orange-700 ring-neutral-400 hover:ring-orange-700 rounded-lg peer-checked:ring-orange-700 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
+                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset hover:text-orange-700 peer-checked:text-orange-700 ring-neutral-400 hover:ring-orange-700 hover:shadow-md hover:shadow-orange-800/25 rounded-lg peer-checked:ring-orange-700 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
                                     <ConeIcon />
                                     <p className='text-black'>
                                         Pothole
@@ -143,7 +144,7 @@ export default function MapPinModal({
                                     checked={issueSelection === '2'}
                                     onChange={onIssueChange}
                                 />
-                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset hover:text-green-700 peer-checked:text-green-700 ring-neutral-400 hover:ring-green-700 rounded-lg peer-checked:ring-green-700 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
+                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset hover:text-green-700 peer-checked:text-green-700 ring-neutral-400 hover:ring-green-700 hover:shadow-md hover:shadow-green-800/25 rounded-lg peer-checked:ring-green-700 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
                                     <TreeIcon />
                                     <p className='text-black'>
                                         Downed Tree
@@ -159,7 +160,7 @@ export default function MapPinModal({
                                     checked={issueSelection === '3'}
                                     onChange={onIssueChange}
                                 />
-                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset ring-neutral-400 hover:ring-yellow-500 hover:text-yellow-500 rounded-lg peer-checked:text-yellow-500 peer-checked:ring-yellow-500 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
+                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset ring-neutral-400 hover:ring-yellow-500 hover:text-yellow-500 hover:shadow-md hover:shadow-yellow-700/25 rounded-lg peer-checked:text-yellow-500 peer-checked:ring-yellow-500 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
                                     <LightIcon />
                                     <p className='text-black'>
                                         Streetlight
@@ -175,7 +176,7 @@ export default function MapPinModal({
                                     checked={issueSelection === '4'}
                                     onChange={onIssueChange}
                                 />
-                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset ring-neutral-400 rounded-lg hover:ring-blue-600 hover:text-blue-600 peer-checked:text-blue-600 peer-checked:ring-blue-600 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
+                                <span className='flex justify-center flex-col items-center w-full h-full py-2 ring-1 ring-inset ring-neutral-400 rounded-lg hover:ring-blue-600 hover:text-blue-600 hover:shadow-md hover:shadow-blue-700/25 peer-checked:text-blue-600 peer-checked:ring-blue-600 peer-checked:ring-2 transition-all ease-in-out cursor-pointer'>
                                     <FloodIcon />
                                     <p className='text-black'>Flooding</p>
                                 </span>
@@ -193,7 +194,7 @@ export default function MapPinModal({
                     <div className='flex flex-row flex-wrap justify-end gap-2 content-center'>
                         <button
                             onClick={handleCancel}
-                            className='text-gray-950 rounded-lg ring-1 ring-inset ring-neutral-400 px-5 py-2 hover:bg-neutral-200 transition ease-in-out'
+                            className="inline-block py-2 px-4 bg-gradient-to-b from-stone-50 to-stone-200 rounded-lg border border-stone-300 transition-all text-stone-800 shadow-sm hover:brightness-95 cursor-pointer"
                         >
                             Cancel
                         </button>
@@ -201,7 +202,7 @@ export default function MapPinModal({
                             type='button'
                             value='Submit'
                             onClick={handleSubmit}
-                            className='text-white rounded-lg bg-emerald-700 font-semibold px-5 py-2 hover:bg-emerald-800 transition ease-in-out cursor-pointer'
+                            className="inline-block py-2 px-4 bg-gradient-to-b from-emerald-600 to-emerald-700 text-white rounded-lg border font-semibold border-emerald-700 transition-all shadow-sm hover:brightness-110 cursor-pointer"
                         />
                     </div>
                     {/* </div> */}
