@@ -15,7 +15,8 @@ export async function GET() {
                 sp.zipcode,
                 sp.municipality,
                 m.department,
-                m.phone_number
+                m.phone_number,
+                sp.date_created
             FROM submitted_pins sp
             JOIN issue_types it ON sp.issue_type = it.id
             JOIN municipalities m ON sp.municipality = m.name
