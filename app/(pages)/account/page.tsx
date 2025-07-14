@@ -38,6 +38,8 @@ export default async function AccountPage() {
                             </Link>
                         </article>
 
+
+                        {/* reenable after figuring out how to delete account */}
                         {/* <Accordion title='Delete your account and data?'>
                             <Accordion title='Are you sure?'>
                                 <div>
@@ -48,11 +50,10 @@ export default async function AccountPage() {
                                         Delete Account
                                     </Link>
 
-                                    <DeleteAccountButton />
-
                                 </div>
                             </Accordion>
                         </Accordion> */}
+
                     </div>
                 </section>
             </section>
