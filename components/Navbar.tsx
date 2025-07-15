@@ -29,7 +29,7 @@ export default async function Navbar() {
                         <p className='text-xs sm:text-sm'>Resources</p>
                     </Link>
 
-                    <Link href='/' className='text-glow flex flex-col items-center drop-shadow-black hover:drop-shadow-black hover:drop-shadow-md drop-shadow-sm/50 hover:scale-110 transition-all'>
+                    <Link href='/about' className='text-glow flex flex-col items-center drop-shadow-black hover:drop-shadow-black hover:drop-shadow-md drop-shadow-sm/50 hover:scale-110 transition-all'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>
                         <p className='text-xs sm:text-sm'>About</p>
                     </Link>
