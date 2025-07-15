@@ -22,7 +22,7 @@ export default function Map() {
     const onClose = () => setShowModal(false)
 
     const session = useSession();
-    const uuid = session?.user?.sub; 
+    const uuid = session?.user?.sub;
 
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY
 
@@ -205,13 +205,16 @@ export default function Map() {
                             coordMapFeatures.length === 0 ||
                             coordMapFeatures[0].source !== 'town-data'
                         ) {
-                            // boundsErrorToast()
+                            showMapTooltip("Out of bounds.", e.point);
                         } else if (
                             // runs when the user doesn't click on a road
                             coordMapFeatures.length > 1 &&
                             coordMapFeatures[1].sourceLayer !== 'road'
                         ) {
                             // pinErrorToast()
+                            showMapTooltip("Pins must be placed on roads", e.point);
+                            console.log(coordMapFeatures)
+                            console.log(e)
                         }
                     }
                 })
@@ -220,6 +223,8 @@ export default function Map() {
                     closeButton: true,
                     closeOnClick: true,
                 })
+
+
 
                 map.on('click', 'pin-points', (e: any) => {
                     // Copy coordinates array.
@@ -306,6 +311,36 @@ export default function Map() {
             })
         }
     }, []);
+
+
+    function showMapTooltip(message: string, point: mapboxgl.Point) {
+        const existing = document.querySelector('.map-tooltip');
+        if (existing) existing.remove();
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'map-tooltip';
+        tooltip.textContent = message;
+
+        Object.assign(tooltip.style, {
+            position: 'absolute',
+            left: `${point.x}px`,
+            top: `${point.y}px`,
+            transform: 'translate(-50%, -100%)',
+            background: 'rgba(0,0,0,0.8)',
+            color: 'white',
+            padding: '6px 10px',
+            borderRadius: '6px',
+            fontSize: '13px',
+            pointerEvents: 'none',
+            zIndex: 1000,
+            animation: 'fadeOut 2s forwards',
+        });
+
+        mapContainer.current?.appendChild(tooltip);
+
+        setTimeout(() => tooltip.remove(), 2000);
+    }
+
 
     async function getAddressFromCoords(longitude: string, latitude: string) {
         const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=address&access_token=${process.env.NEXT_PUBLIC_MAPBOX_API_KEY}`
@@ -410,7 +445,7 @@ export default function Map() {
                             municipality={municipality}
                             onClose={onClose}
                             fetchDataAndAddToMap={() => fetchDataAndAddToMap(mapRef.current)} // Pass the function with mapRef
-                            uuid={uuid} 
+                            uuid={uuid}
                         />
                     ) : (
                         <div className="bg-white rounded-lg p-6 shadow-xl max-w-sm text-center">
