@@ -326,14 +326,15 @@ export default function Map() {
             left: `${point.x}px`,
             top: `${point.y}px`,
             transform: 'translate(-50%, -100%)',
-            background: 'rgba(0,0,0,0.8)',
+            background: 'rgba(180, 30, 30, 0.5)',
+
             color: 'white',
             padding: '6px 10px',
             borderRadius: '6px',
             fontSize: '13px',
             pointerEvents: 'none',
             zIndex: 1000,
-            animation: 'fadeOut 2s forwards',
+            animation: 'wiggle 0.4s ease, fadeOut 2s 0.4s forwards',
         });
 
         mapContainer.current?.appendChild(tooltip);
