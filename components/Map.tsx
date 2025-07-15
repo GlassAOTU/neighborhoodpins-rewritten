@@ -213,8 +213,8 @@ export default function Map() {
                         ) {
                             // pinErrorToast()
                             showMapTooltip("Pins must be placed on roads", e.point);
-                            console.log(coordMapFeatures)
-                            console.log(e)
+                            // console.log(coordMapFeatures)
+                            // console.log(e)
                         }
                     }
                 })
@@ -237,7 +237,7 @@ export default function Map() {
                     const department = e.features[0].properties.department
                     const phone_number = e.features[0].properties.phone_number
 
-                    console.log(e.features[0])
+                    // console.log(e.features[0])
 
                     // Ensure that if the map is zoomed out such that multiple
                     // copies of the feature are visible, the popup appears
@@ -355,7 +355,7 @@ export default function Map() {
                 setAddress(cleanAddress(rawAddress))
                 setShowModal(true)
             } else {
-                console.log('No address data found.')
+                // console.log('No address data found.')
             }
         } catch (error) {
             console.error('Error fetching geocode data:', error)

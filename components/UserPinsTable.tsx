@@ -44,7 +44,7 @@ export default function ReportsTable() {
             });
             const data = await response.json();
 
-            console.log(data)
+            // console.log(data)
 
             setTableData(data)
 
