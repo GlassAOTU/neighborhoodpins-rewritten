@@ -11,10 +11,6 @@ export async function GET() {
     const userId = session.user.sub;
 
     try {
-        // const result = await pool.query(
-        //     'SELECT * FROM submitted_pins WHERE submitted_by = $1',
-        //     [userId]
-        // );
         const result = await pool.query(`
             SELECT 
                 sp.id,
